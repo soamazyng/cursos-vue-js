@@ -8,43 +8,66 @@
 </head>
 <body>
 
-<div class="container" id="hello">
-	<div class="row">
-		<h1>{{msg}}</h1>
-		<input type="text" name="" class="form-control" v-model="msg" />
+	<div class="container" id="hello">
+		<div class="row">
+			<h1>{{msg}}</h1>
+			<input type="text" name="" class="form-control" v-model="msg" />
+		</div>
+
+		<div class="row">
+			<h1>My List</h1>
+			<ul>
+				<li v-for="person in people">
+					{{person.name}}
+				</li>
+			</ul>
+		</div>
+
+		<div class="row">
+			<h1>My List elements</h1>
+			<input type="text" name="" class="form-control" v-model="newElement" v-on:keyup.enter="addElement" />
+			<ul>
+				<li v-for="element in elements">
+					{{element.title}}
+					<a href="#" v-on:click="removeElement($event, $index)" class="btn btn-primary">X</a>
+				</li>
+			</ul>		
+		</div>
+
+		<div class="row">
+			<h1>v-on</h1>
+			<div><button v-on:click="myClick">Click</button></div>
+			<div><button @click="myClick">Click de forma reduzida</button></div>
+			<div><input type="text" name="" @keyup="myKeyup" placeholder="MyKeyup"></div>
+			<div><input type="text" name="" @keyup.enter="myKeyup" placeholder="MyKeyup with enter"></div>
+		</div>
+
+		<div class="row">
+			<h1>v-bind</h1>
+			<p v-bind:class="{'text-danger' : 2 === 1, 'text-info' : true }">text</p>
+			<!-- forma reduzida -->
+			<p :class="{'text-danger' : 2 === 1, 'text-info' : true }">:text</p>
+			<p :style="{fontSize: 30 + 'px' }">:Style</p>
+			<p :style="{'font-size': 30 + 'px' }">:Style</p>
+			<p :style="[objectA, objectB]">:Object A e B</p>
+			<p v-bind:="{id : 1 === 1, name : true}">bind attribute</p>
+		</div>
+
+		<div class="row">
+			<h1>v-model</h1>
+			<ul>
+				<li v-for="myList in myListForm">
+						{{ myList.name }} - {{myList.email}}
+				</li>
+			</ul>
+			<input type="text" name="" v-model="myForm.name" placeholder="Name">
+			<input type="text" name="" v-model="myForm.email" placeholder="Email">
+			<button class="btn" @click="addForm">Add</button>
+		</div>
 	</div>
 
-	<div class="row">
-		<h1>My List</h1>
-		<ul>
-			<li v-for="person in people">
-				{{person.name}}
-			</li>
-		</ul>
-	</div>
-
-	<div class="row">
-		<h1>My List elements</h1>
-		<input type="text" name="" class="form-control" v-model="newElement" v-on:keyup.enter="addElement" />
-		<ul>
-			<li v-for="element in elements">
-				{{element.title}}
-				<a href="#" v-on:click="removeElement($event, $index)" class="btn btn-primary">X</a>
-			</li>
-		</ul>		
-	</div>
-
-	<div class="row">
-		<h1>v-on</h1>
-		<div><button v-on:click="myClick">Click</button></div>
-		<div><button @click="myClick">Click de forma reduzida</button></div>
-		<div><input type="text" name="" @keyup="myKeyup" placeholder="MyKeyup"></div>
-		<div><input type="text" name="" @keyup.enter="myKeyup" placeholder="MyKeyup with enter"></div>
-	</div>
-</div>
-
-<script src="node_modules/vue/dist/vue.js"></script>
-<script src="node_modules/vue-resource/dist/vue-resource.js"></script>
-<script src="js/app.js"></script>
+	<script src="node_modules/vue/dist/vue.js"></script>
+	<script src="node_modules/vue-resource/dist/vue-resource.js"></script>
+	<script src="js/app.js"></script>
 </body>
 </html>

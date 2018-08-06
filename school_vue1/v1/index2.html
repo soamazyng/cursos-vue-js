@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>My Books</title>
+	<link rel="stylesheet" type="text/css" href="./node_modules/bootstrap/dist/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="./node_modules/font-awesome/css/font-awesome.css">
+</head>
+<body>
+
+	<div class="container" id="app">
+
+		<div class="row">
+			<h1>Books</h1>
+
+			<div class="well">
+				<input type="search" name="" v-model="mySearch" class="form-control" placeholder="Search">
+			</div>
+		</div>
+
+		<div class="row">
+			<table class="table">
+				<thead>
+					<tr>
+						<th> 
+							<a href="#" @click="filterOrderBy($event, 'id')">
+								<i class="fa fa-fw fa-sort" 
+								v-bind:class="{'fa-sort-amount-asc' : orderCol == 'id' && orderInverse ===1,
+								'fa-sort-amount-desc' : orderCol == 'id' && orderInverse === -1 }"
+								></i>Id</a></th>
+								<th><a href="#" @click="filterOrderBy($event, 'title')">
+									<i class="fa fa-fw fa-sort" 
+									v-bind:class="{'fa-sort-amount-asc' : orderCol == 'title' && orderInverse ===1,
+									'fa-sort-amount-desc' : orderCol == 'title' && orderInverse === -1 }"
+									></i>Title</a></th>
+									<th><a href="#" @click="filterOrderBy($event, 'value')">
+										<i class="fa fa-fw fa-sort" 
+										v-bind:class="{'fa-sort-amount-asc' : orderCol == 'value' && orderInverse ===1,
+										'fa-sort-amount-desc' : orderCol == 'value' && orderInverse === -1 }"
+										></i>Value</a></th>
+										<th><a href="#" @click="filterOrderBy($event, 'description')">
+											<i class="fa fa-fw fa-sort" 
+											v-bind:class="{'fa-sort-amount-asc' : orderCol == 'description' && orderInverse ===1,
+											'fa-sort-amount-desc' : orderCol == 'description' && orderInverse === -1 }"
+											></i>Description</a></th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr v-for="book in books | filterBy mySearch 'title' 'description' | orderBy orderCol orderInverse" > <!-- 'nome-coluna' -->
+											<td>{{ book.id }}</td>
+											<td>{{ book.title | capitalize }}</td>
+											<td>{{ book.value | dinheiro }}</td>
+											<td>{{ book.description }}</td>
+										</tr>
+									</tbody>
+								</table>
+
+								<nav aria-label="Page navigation" class="text-center">
+									<ul class="pagination">
+										<li>
+											<a href="#" @click="previous" aria-label="Previous">
+												<span aria-hidden="true">&laquo;</span>
+											</a>
+										</li>
+										<li><a href="#" @click="pagePagination($event, 1)">1</a></li>
+										<li>
+											<a href="#" aria-label="Next" @click="next">
+												<span aria-hidden="true">&raquo;</span>
+											</a>
+										</li>
+									</ul>
+								</nav>
+							</div>
+						</div>
+
+						<script src="node_modules/vue/dist/vue.js"></script>
+						<script src="node_modules/vue-resource/dist/vue-resource.js"></script>	
+						<script src="js/app2.js"></script>
+					</body>
+					</html>

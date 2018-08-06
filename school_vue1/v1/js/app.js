@@ -10,7 +10,18 @@ var hello = new Vue({
 			{name: "B"}
 		],
 		newElement:'',
-		elements:[]
+		elements:[],
+		objectA:{
+			'font-size': '30px'
+		},
+		objectB:{
+			'color' : 'red'
+		},
+		myListForm : [],
+		myForm : {
+			name: '',
+			email: '',
+		}		
 	},
 	methods: {
 		addElement : function(e){
@@ -31,6 +42,15 @@ var hello = new Vue({
 		},
 		myKeyup: function(){
 			alert("MyKeyup");
+		},
+		addForm : function(){
+			this.myListForm.push({
+				name : this.myForm.name,
+				email: this.myForm.email
+			});
+
+			this.myForm.name = '';
+			this.myForm.email = '';
 		}
 	}
 });
