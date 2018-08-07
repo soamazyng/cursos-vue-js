@@ -34,5 +34,17 @@
     "title":"Docker: Up & Running",
     "value":21.62,
     "description":"Docker is quickly changing the way that organizations are deploying software at scale"
-  }
+  },
+  {
+    "id":7,
+    "title":"Building Microservices",
+    "value":42.34,
+    "description":"Distributed systems have become more fine-grained in the past 10 years"
+  },
+  {
+    "id":8,
+    "title":"Docker: Up & Running",
+    "value":21.62,
+    "description":"Docker is quickly changing the way that organizations are deploying software at scale"
+  }  
 ]
