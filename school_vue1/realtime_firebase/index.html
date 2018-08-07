@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Chat da School of Net</title>
+	<link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+</head>
+<body>
+	<div class="container">		
+		<div class="row">				
+				<div id="chat" class="col-md-8">
+					<my-chat></my-chat>
+
+				</div>			
+		</div>
+	</div>
+
+		<script src="./node_modules/jquery/dist/jquery.min.js"></script>
+		<script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+		<script src="./node_modules/vue/dist/vue.min.js"></script>
+		<script>
+
+			var chatComponent = Vue.extend({
+				template : `
+				<style type="text/css" scoped>
+				.chat{
+					padding: 0;			
+				}
+
+				.chat li{
+					margin-bottom: 15px;
+					padding-bottom: 15px;
+				}
+
+				.chat li.left .chat-body{
+					margin-left: 70px;
+				}
+
+				.chat li.right .chat-body{
+					text-align: right;
+					margin-right: 70px;
+				}
+
+				.panel-body{
+					overflow-y: scroll;
+					height: 400px;
+				}
+				</style>
+
+				<div class="panel panel-primary">
+				<div class="panel-heading">Chat</div>
+				<div class="panel-body">
+				<ul class="chat list-unstyled">
+				<li class="clearfix"
+				v-bind:class="{left : !isUser(o.email), right : isUser(o.email)}" v-for="o in chat.messages">
+				<span v-bind:class="{'pull-left' : !isUser(o.email), 'pull-right' : isUser(o.email)}">
+				<img class="img-cicle" src="{{o.photo}}" />
+				</span>
+				<div class="chat-body">
+				<p>{{o.text}}</p>
+				</div>
+				</li>							
+				</ul>
+				</div>
+				<div class="panel-footer">
+				<div class="input-group">
+				<input type="text" name="" class="form-control input-md" placeholder="Digite">
+				<span class="input-group-btn">
+				<button class="btn btn-success btn-md">Enviar</button>
+				</span>
+				</div>
+				</div>
+				</div>
+				`, 
+				data: function(){
+					return{
+						user : {
+							email : 'j@gmail',
+							name: 'jay'
+						},
+						chat : {
+							messages : [
+							{text : "ttt", name : "F", email:"f@gmail", photo : "http://placehold.it/50/000FFF/fff&text=00"},
+							{text : "aaa", name : "L", email : "j@gmail", photo : "http://placehold.it/50/FFFFFF/000&text=EU"}
+							]
+						}
+					};
+				},
+				methods : {
+					isUser : function(email){
+						return this.user.email == email;
+					}
+				}				
+			});
+
+			//registra o componente --> o primeiro é o nome da tag o segundo é o componente
+			Vue.component('my-chat', chatComponent); 
+
+			var chat = new Vue({
+				el: "#chat"
+			});
+
+		</script>
+	</body>
+	</html>
