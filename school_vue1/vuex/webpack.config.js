@@ -1,6 +1,6 @@
 module.exports = {
 	entry: [
-		'style-loader!css-loader!./node_modules/bootstrap/dist/css/bootstrap.min.css' // logo quando o webpack compilar ele já vai add isso na entrada.
+		'style-loader!css-loader!./node_modules/bootstrap/dist/css/bootstrap.min.css', // logo quando o webpack compilar ele já vai add isso na entrada.
 		'./app/main'
 	],
 	output : {
