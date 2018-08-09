@@ -21,8 +21,12 @@ $ npm install webpack --save-dev <br>
 ##e parar rodar o webservice do webpack depois disso *obs: provavelmente terá que instalar o webpack-cli*
 $ webpack-dev-server --progress --inline --hot
 
-## quando você está trabalhando com webpack server ele não gera o arquivo .js, para publicar o projeto tem que rodar o webpack de qualquer maneira, para gerar o bundle.
+## quando você está trabalhando com webpack server ele não gera o arquivo .js, para publicar o projeto tem que rodar o webpack de qualquer maneira, para gerar o bundle. $webpack
 
 ##error de validateSchema:  <br>
 https://stackoverflow.com/questions/40597626/webpack-validateschema-is-not-a-function/49106502#49106502
+
+##instalando o babel
+$ npm install babel-loader babel-core babel-preset-es2015 --save-dev <br>
+babel-preset-es2015 --> essa parte é para indicar para o que o babel vai compilar
 
