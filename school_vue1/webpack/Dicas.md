@@ -30,3 +30,9 @@ https://stackoverflow.com/questions/40597626/webpack-validateschema-is-not-a-fun
 $ npm install babel-loader babel-core babel-preset-es2015 --save-dev <br>
 babel-preset-es2015 --> essa parte é para indicar para o que o babel vai compilar
 
+
+##instalando o loader html do webpack
+$ npm install html-loader --save-dev
+
+##loarder que pega o conteúdo css e coloca na página <style> css-loader : entende o conteúdo do css; url-loader: entende as urls de dentro do arquivo css; file-loader: usamos para trabalhar com todos os outros tipos de arquivos
+$ npm install style-loader css-loader url-loader file-loader --save-dev

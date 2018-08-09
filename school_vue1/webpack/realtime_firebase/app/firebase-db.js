@@ -1,4 +1,4 @@
-var Firebase = require('firebase');
+import Firebase from 'firebase'
 
 var firebaseApp = Firebase.initializeApp({
 	apiKey: "AIzaSyCFMj-8cypZZugZbHU_zjrOe6zVGPejaSI",
@@ -9,4 +9,5 @@ var firebaseApp = Firebase.initializeApp({
 	messagingSenderId: "487401176649"
 	  }); //importar as credenciais
 
-module.exports = firebaseApp.database(); //exportando a instancia do banco de dados
+//export default só exporta o que vem depois da palavra default
+export default firebaseApp.database(); //exportando a instancia do banco de dados
