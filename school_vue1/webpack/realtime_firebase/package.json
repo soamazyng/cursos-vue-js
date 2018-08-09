@@ -16,6 +16,11 @@
     "npm": "^6.3.0",
     "vue": "^1.0.28",
     "vue-router": "^0.7.13",
-    "vuefire": "^1.1.1"
+    "vuefire": "^1.1.1",
+    "webpack": "^3.10.0",
+    "webpack-cli": "^2.0.10"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^2.9.7"
   }
 }
