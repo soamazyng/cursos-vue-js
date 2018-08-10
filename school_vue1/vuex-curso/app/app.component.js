@@ -7,7 +7,7 @@ export default{
 	template: require('html-loader!../templates/app.component.html'),
 	data: function(){
 		return{
-			inline: "0"
+			//inline: "0"
 		}
 	},
 	components: {
@@ -16,17 +16,6 @@ export default{
 		'commands-component' : CommandsComponent
 	},
 	events:{
-		ADD_ELEMENT(element){
-			if(this.inline == 0)
-				this.inline = '';
-
-			this.inline += element;			
-		},
-		RESULT(){
-			this.inline = eval(this.inline) + "";
-		},
-		CLEAR(){
-			this.inline = 0;	
-		}
+		
 	}
 }

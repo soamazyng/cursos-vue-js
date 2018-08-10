@@ -4,6 +4,7 @@ requirejs(['firebase-config'], function(config){
 
 	//cria uma variavel para trabalhar com o firebase
 		var firebaseApp = firebase.initializeApp(config);
+		
 
 		var chatComponent = Vue.extend({
 			template : `

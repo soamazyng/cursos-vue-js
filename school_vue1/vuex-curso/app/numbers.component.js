@@ -7,9 +7,17 @@ export default{
 		}
 	},
 	methods: {
-		addNumber(number){
-			this.$dispatch('ADD_ELEMENT', number) //dispara o evento filho para pai			
-			//this.$emit(evento, dado); dispara o evento pai para filho
-		}
+		// addNumber(number){
+		// 	//this.$dispatch('ADD_ELEMENT', number) //dispara o evento filho para pai			
+		// 	//this.$emit(evento, dado); dispara o evento pai para filho
+		// }
+	},
+	vuex:{
+		actions:{
+			addNumber(store, number){
+				//vamos disparar um evento que vai chamar o nosso mutation
+				store.dispatch('ADD_ELEMENT', number);
+			}		
+		}				
 	}
 }

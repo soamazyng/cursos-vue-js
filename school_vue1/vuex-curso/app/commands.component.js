@@ -8,20 +8,37 @@ export default{
 		}
 	},
 	methods: {
-		addOperator(operator){
-			this.$dispatch('ADD_ELEMENT', operator); //dispara o evento filho para pai					
-		},
-		callCommand(command){			
+		// addOperator(operator){
+		// 	this.$dispatch('ADD_ELEMENT', operator); //dispara o evento filho para pai					
+		// },
+		// callCommand(command){			
 
-			switch(command){
-				case '=':
-					//this.$parent.inline = eval(this.$parent.inline) + ""; //eval devolve o resultado passo + "" para transformar tudo em string					this.$dispatch('ADD_ELEMENT', operator) //dispara o evento filho para pai					
-					this.$dispatch('RESULT');
-					break;
-				case 'C':
-					this.$dispatch('CLEAR');
-					break;
-			}
-		},		
-	}	
+		// 	switch(command){
+		// 		case '=':
+		// 			//this.$parent.inline = eval(this.$parent.inline) + ""; //eval devolve o resultado passo + "" para transformar tudo em string					this.$dispatch('ADD_ELEMENT', operator) //dispara o evento filho para pai					
+		// 			this.$dispatch('RESULT');
+		// 			break;
+		// 		case 'C':
+		// 			this.$dispatch('CLEAR');
+		// 			break;
+		// 	}
+		// },		
+	},
+	vuex:{
+		actions:{
+			addOperator(store, operator){
+				store.dispatch('ADD_ELEMENT', operator);
+			},
+			callCommand(store, command){			
+				switch(command){
+					case '=':
+						store.dispatch('RESULT');
+						break;
+					case 'C':
+						store.dispatch('CLEAR');
+						break;
+				}
+			},					
+		}				
+	}
 }
