@@ -18,7 +18,7 @@ $ wepack-dev-server
 ##para utilizar o server do webpack com o browsersync + watch de arquivos, devemos instalar o webpack no nosso projeto, como depenência.
 $ npm install webpack --save-dev <br>
 
-##e parar rodar o webservice do webpack depois disso *obs: provavelmente terá que instalar o webpack-cli*
+##e para rodar o webservice do webpack depois disso *obs: provavelmente terá que instalar o webpack-cli*
 $ webpack-dev-server --progress --inline --hot
 
 ## quando você está trabalhando com webpack server ele não gera o arquivo .js, para publicar o projeto tem que rodar o webpack de qualquer maneira, para gerar o bundle.

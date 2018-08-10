@@ -11,3 +11,6 @@ $ npm install url-loader file-loader style-loader html-loader css-loader --save-
 ##rodando o webpack
 $ webpack-dev-server --progress --hot --inline
 $ npm install --save-dev webpack-dev-server@2.9.7
+
+##e para rodar o webservice do webpack depois disso *obs: provavelmente terá que instalar o webpack-cli*
+$ webpack-dev-server --progress --inline --hot
