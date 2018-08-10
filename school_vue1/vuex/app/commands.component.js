@@ -6,5 +6,22 @@ export default{
 			operators: ['+', '-', '*', '/'],
 			commands: ['=', 'C']
 		}
-	}
+	},
+	methods: {
+		addOperator(operator){
+			this.$dispatch('ADD_ELEMENT', operator); //dispara o evento filho para pai					
+		},
+		callCommand(command){			
+
+			switch(command){
+				case '=':
+					//this.$parent.inline = eval(this.$parent.inline) + ""; //eval devolve o resultado passo + "" para transformar tudo em string					this.$dispatch('ADD_ELEMENT', operator) //dispara o evento filho para pai					
+					this.$dispatch('RESULT');
+					break;
+				case 'C':
+					this.$dispatch('CLEAR');
+					break;
+			}
+		},		
+	}	
 }

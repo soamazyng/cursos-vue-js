@@ -5,5 +5,11 @@ export default{
 		return{
 			numbers: [1,2,3,4,5,6,7,8,9,0]
 		}
+	},
+	methods: {
+		addNumber(number){
+			this.$dispatch('ADD_ELEMENT', number) //dispara o evento filho para pai			
+			//this.$emit(evento, dado); dispara o evento pai para filho
+		}
 	}
 }

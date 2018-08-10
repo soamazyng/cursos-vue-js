@@ -1,7 +1,7 @@
 <div class="col-md-6">
-	<button v-for="o in operators" class="btn btn-primary btn-block">{{o}}</button>
+	<button v-for="o in operators" class="btn btn-primary btn-block" @click="addOperator(o)">{{o}}</button>
 </div>
 
 <div class="col-md-6">
-	<button v-for="o in commands" class="btn btn-primary btn-block">{{o}}</button>
+	<button v-for="o in commands" class="btn btn-primary btn-block" @click="callCommand(o)">{{o}}</button>
 </div>
