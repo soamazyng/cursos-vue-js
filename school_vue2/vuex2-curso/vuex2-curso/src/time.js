@@ -1,6 +1,7 @@
 export class Time{
 
-    constructor(nome, escudo){
+    constructor(id, nome, escudo){
+        this.id = id;
         this.nome = nome;
         this.escudo = escudo;
 

@@ -1,4 +1,4 @@
-# vuex2-curso
+# vuex2
 
 > A Vue.js project
 
