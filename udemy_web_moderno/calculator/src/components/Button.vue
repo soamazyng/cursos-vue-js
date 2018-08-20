@@ -1,6 +1,6 @@
 <template>
 	<button class="button">
-		0
+		test
 	</button>
 </template>
 
