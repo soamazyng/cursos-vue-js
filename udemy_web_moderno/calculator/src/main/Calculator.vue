@@ -1,7 +1,10 @@
 <template>
 	<div class="calculator">
-		<Display></Display>
-		<Button></Button>
+		<display></display>
+		<button></button>
+		<button></button>
+		<button></button>
+		<button></button>
 	</div>
 </template>
 
