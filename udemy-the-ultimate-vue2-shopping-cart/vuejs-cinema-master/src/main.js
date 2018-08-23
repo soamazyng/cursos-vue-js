@@ -1,65 +1,38 @@
 import Vue from 'vue';
 import './style.scss';
-import genres from './util/genres';
+
+import MovieList from './components/MovieList.vue';
+import MovieFilter from './components/MovieFilter.vue';
+
+import VueResource from 'vue-resource';
+Vue.use(VueResource);
 
 new Vue({
 	el : "#app",
-	components: {
-		'movie-list' : {
-			template: `
-			<div id="movie-list">
-				<div v-for="movie in movies" class="movie">
-					{{movie.title}}
-				</div>
-			</div>
-			`,
-			data()  {
-				return {
-					movies: [
-						{title: 'Pulp Fiction'},
-						{title: 'Home Alone'},
-						{title: 'Austin Powers'}
-					]		
-				}
-			}
-		},
-		'movie-filter' : {
-			data(){return{
-				genres
-			}},
-			methods: {
-				checkFilter(){
-					console.log('teste');
-				}
-			},
-			template: `
-			<div id="movie-filter">
-				<h2>Filter results</h2>
-				<div class="filter-group">
-					<check-filter v-for="genre in genres" :title="genre" v-on:check-filter="checkFilter"></check-filter>
-				</div>
-			</div>
-			`,
-			components : {
-				'check-filter' : {
-					data(){
-						return {
-							checked : false							
-						}
-					},
-					methods:{
-						checkFilter(){
-							this.checked = !this.checked;
-							this.$emit('check-filter');
-						}
-					},
-					props: ['title'],
-					template : `<div :class="{'check-filter' : true, active: checked}" v-on:click="checkFilter"> 
-							<span class="checkbox"></span>
-							<span class="check-filter-title">{{title}}</span>
-							</div>`,
+	methods:{
+		checkFilter(category, title, checked){
+			if(checked){
+				this[category].push(title);
+			}else{
+				let index = this[category].indexOf(title);
+				if(index > -1){
+					this[category].splice(index, 1);
 				}
 			}
 		}
+	},
+	data: {
+		genre: [],
+		time: [],
+		movies: []
+	},
+	components: {
+		MovieList,	
+		MovieFilter
+	},
+	created(){
+		this.$http.get('/api').then(response => {
+			this.movies = response.data;
+		});
 	}
 });
