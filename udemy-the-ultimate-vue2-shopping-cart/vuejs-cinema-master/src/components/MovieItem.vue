@@ -4,8 +4,11 @@
 			<img :src="movie.Poster" />
 		</div>
 		<div class="movie-col-right">
-			<div class="movie-title">
-				<h2>{{movie.Title}}</h2> 
+			<div class="movie-title">        
+        <router-link :to="{name: 'movie', params: {id: movie.imdbID}}">
+        <h2>{{movie.Title}}</h2>   
+        </router-link>
+				
 				<span class="movie-rating">{{movie.Rated}}</span>
 			</div>
 			<div class="movie-sessions">
@@ -13,6 +16,9 @@
 					<div class="session-time">{{formatSessionTime(session.time)}}</div>
 				</div>
 			</div>
+      <div class="movie-details">
+         <slot name="description"></slot>
+      </div>
 		</div>					
 </div>
 </template>
