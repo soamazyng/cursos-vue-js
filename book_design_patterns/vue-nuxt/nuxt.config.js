@@ -18,21 +18,19 @@ module.exports = {
     },
     ]
   },
-  router: {
-    base: '/vuejs/' //add um subdiretório ex: jay.com.br/vuejs #https://nuxtjs.org/api/configuration-router/
-  },
   /*
   ** Customize the progress bar color
   */
   loading: { color: '#3B8070' },
   css: ['~/assets/transition.css'],
+  debug: true,
   /*
   ** Build configuration
   */
   build: {
     /*
     ** Run ESLint on save
-    */    
+    */
     extend (config, { isDev, isClient }) {
       if (isDev && isClient) {
         config.module.rules.push({
