@@ -2,7 +2,7 @@
 	<div id="day-select">
 		<ul class="days">
 			<li :class="{day : true, active : isActive(day)}" 
-				v-for="day in days" 
+				v-for="day in days" 				
 				@click="selectDay(day)" >{{ formatDay(day)}}</li>
 
 			<li class="day-selector">
@@ -41,8 +41,7 @@ export default {
 			let newDay = this.$moment(this.selected).add(change, 'days');
 			if(this.days.find(day => newDay.isSame(day, 'day'))){
 				this.selectDay(newDay);	
-			}
-			
+			}			
 		}
 	}
 }
