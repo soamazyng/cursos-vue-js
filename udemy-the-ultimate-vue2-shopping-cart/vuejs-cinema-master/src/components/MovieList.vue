@@ -1,13 +1,16 @@
 <template>
 	<div id="movie-list">
 		<div v-if="filteredMovies.length">
-			<movie-item 
-					v-for="movie in filteredMovies" 
-					:movie="movie.movie" 
-					:sessions="movie.sessions"
-					:day="day"
-					:time="time"
-					></movie-item>	
+			<movie-item v-for="movie in filteredMovies" :movie="movie.movie">
+				<div class="movie-sessions">
+					<div 
+						v-tooltip="{seats : session.seats}"
+						:key="session.id"
+						v-for="session in filteredSessions(movie.sessions)" class="session-time-wrapper tooltip-wrapper">
+						<div class="session-time">{{formatSessionTime(session.time)}}</div>
+					</div>        
+				</div>
+			</movie-item>	
 		</div>
 		<div v-else-if="movies.length" class="no-results"> 
 			{{ noResults }}
@@ -38,6 +41,12 @@
 					return matched;
 				}
 			},
+			formatSessionTime(raw) {
+				return this.$moment(raw).format('h:mm A');
+			},
+			filteredSessions(sessions){
+				return sessions.filter(this.sessionPassesTimeFilter);
+			},
 			sessionPassesTimeFilter(session){
 				if(!this.day.isSame(this.$moment(session.time), 'day')){
 					return false
@@ -48,14 +57,14 @@
 				}else{
 					return this.$moment(session.time).hour() < 18;
 				}				
-			}
+			}  
 		},
 		computed:{
 			filteredMovies(){
 				return this.movies
-								.filter(this.moviePassesGenreFilter)
-								.filter(movie => movie.sessions.find(this.sessionPassesTimeFilter))
-								;
+				.filter(this.moviePassesGenreFilter)
+				.filter(movie => movie.sessions.find(this.sessionPassesTimeFilter))
+				;
 
 			},
 			noResults(){
