@@ -1,8 +1,17 @@
-import Vue from 'vue'
+import Vue from 'vue';
+import './style.scss';
+import App from './components/App.vue';
+
+import moment from 'moment-timezone';
+moment.tz.setDefault('UTC');
+Object.defineProperty(Vue.prototype, '$moment', {get (){ return this.$root.moment}});
 
 new Vue({
   el: '#app',
   data: {
-    msg: 'Hello World'
+  	moment
+  },
+  components: {
+  	App
   }
 });
