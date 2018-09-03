@@ -1,35 +1,55 @@
 <template>
-	<div>
-    <div v-for="week in weeks">
-      Week
-      <div v-for="day in week">{{day}}</div>
+  <div>
+    <div id="day-bar">
+      <div class="">Mon</div>
+      <div class="">Tue</div>
+      <div class="">Wed</div>
+      <div class="">Thu</div>
+      <div class="">Fri</div>
+      <div class="">Sat</div>
+      <div class="">Sun</div>
+    </div>
+    <div id="calendar">
+      <div v-for="week in weeks" class="calendar-week">
+        <calendar-day v-for="day in week" :day="day"></calendar-day>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-  export default {  
-    data () {
-      return {
-        month: 2,
-        year: 2017
-      }
-    },
-    computed: {
-      weeks(){
-        let weeks = [];
-        let week = [];
+import CalendarDay from './CalendarDay.vue';
 
-        for(let day of this.days){
-          week.push(day);
-          if(week.length === 7){
-            weeks.push(week);
-            week = [];
-          }
+export default {  
+  data () {
+    return {
+
+    }
+  },
+  components:{
+    CalendarDay
+  },
+  computed: {
+    weeks(){
+      let weeks = [];
+      let week = [];
+
+      for(let day of this.days){
+        week.push(day);
+        if(week.length === 7){
+          weeks.push(week);
+          week = [];
         }
-        return weeks
-      },
-     days(){
+      }
+      return weeks
+    },
+    month(){
+      return this.$store.state.currentMonth;
+    },
+    year(){
+      return this.$store.state.currentYear;
+    },
+    days(){
 
   		//Generating all days in current month
   		let days = [];
@@ -68,6 +88,3 @@
   }  
 }
 </script>
-
-<style lang="css" scoped>
-</style>
