@@ -2,6 +2,8 @@ require('dotenv').config();
 
 const path = require('path');
 const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const PrerenderSpaPlugin = require('prerender-spa-plugin');
 
 module.exports = {
   entry: [
@@ -10,6 +12,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',
+    //publicPath: '/dist/',
     filename: 'build.js'
   },
   module: {
@@ -89,4 +92,16 @@ if (process.env.NODE_ENV === 'production') {
       minimize: true
     })
   ])
+  module.exports.plugins.push(
+    new HtmlWebpackPlugin({
+      template: './index.html',
+      inject: false
+    }),
+    );
+  module.exports.plugins.push(
+    new PrerenderSpaPlugin(
+      path.join(__dirname, './dist'),
+      [ '/', 'movie' ]
+      )
+    );
 }
