@@ -1,5 +1,13 @@
 <template>
   <div>
+    <div id="header">
+      <div>
+        <h1>Vue.js Calendar</h1>
+      </div>
+      <div>
+        <current-month></current-month>
+      </div>
+    </div>
     <div id="day-bar">
       <div class="">Mon</div>
       <div class="">Tue</div>
@@ -19,6 +27,7 @@
 
 <script>
 import CalendarDay from './CalendarDay.vue';
+import CurrentMonth from './CurrentMonth.vue';
 
 export default {  
   data () {
@@ -27,7 +36,8 @@ export default {
     }
   },
   components:{
-    CalendarDay
+    CalendarDay,
+    CurrentMonth
   },
   computed: {
     weeks(){
