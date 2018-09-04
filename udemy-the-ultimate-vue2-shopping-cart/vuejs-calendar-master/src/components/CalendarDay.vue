@@ -1,6 +1,11 @@
 <template>
 	
-	<div :class="classObject">{{day.format('D')}}</div>
+	<div :class="classObject" @click="captureClick">
+		{{day.format('D')}}
+		<ul class="event-list">
+			<li v-for="event in events">{{event.description}}</li>
+		</ul>
+	</div>
 
 </template>
 
@@ -8,6 +13,9 @@
 export default {
 	props: ['day'],
 	computed:{
+		events() {
+			return this.$store.state.events.filter(event=> event.date.isSame(this.day, 'day'));
+		},
 		classObject(){
 			let today = this.day.isSame(this.$moment(), 'day');
 			return{
@@ -17,10 +25,16 @@ export default {
 			}
 		}
 	},
-  data () {
-    return {
+	methods:{
+		captureClick(e){
+			this.$store.commit('eventFormPos', {x: event.clientX, y: event.clientY});
+			this.$store.commit('eventFormActive', true);
+		}
+	},
+	data () {
+		return {
 
-    }
-  }
+		}
+	}
 }
 </script>
