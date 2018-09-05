@@ -32,7 +32,7 @@ export default new Vuex.Store({
 		eventFormActive(state, payload){
 			state.eventFormActive = payload;
 		},
-		addEvent(state, payload){
+		addEvent(state, payload){			
 			state.events.push(payload)
 		},
 		eventFormDate(state, payload){
@@ -40,10 +40,16 @@ export default new Vuex.Store({
 		}
 	},
 	actions:{
-		addEvent(context, payload){
+		addEvent(context, payload){			
+			
+			let obj = {
+				description: payload,
+				date: context.state.eventFormDate
+			};	
+
 			return new Promise((resolve, reject) =>{
 				Axios.post('/add_event', obj).then(response => {
-					if(response.status === 200){
+					if(response.status === 200){						
 						context.commit('addEvent', obj);
 						resolve();
 					}else{
@@ -51,10 +57,6 @@ export default new Vuex.Store({
 					}
 				});		
 			});
-			let obj = {
-				description: payload,
-				date: context.state.eventFormDate
-			};	
 		}
 	}
 });
