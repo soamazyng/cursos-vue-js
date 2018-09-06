@@ -4,8 +4,16 @@ var path = require('path');
 var server = require('http').createServer(app);
 var axios = require('axios');
 var querystring = require('querystring');
+var Pusher = require('pusher');
 
 require('dotenv').config();
+
+var pusher = new Pusher({
+  appId : process.env.PUSHER_APP_ID,
+  key : process.env.PUSHER_KEY,
+  secret : process.env.PUSHER_SECRET,
+  cluster : process.env.PUSHER_CLUSTER,
+});
 
 var bodyParser = require('body-parser');
 app.use( bodyParser.json() );
@@ -22,13 +30,18 @@ var instance = axios.create({
 app.get('/search/:query', function(req, res) {
   const url = 'gallery/search/top/0/?' + querystring.stringify({ q: req.params.query });
   instance.get(url)
-    .then(function (result) {
-      res.send(result.data.data.filter(item => !item.is_album && !item.nsfw && !item.animated));
-    })
-    .catch(function (error) {
-      console.log(error);
-    })
+  .then(function (result) {
+    res.send(result.data.data.filter(item => !item.is_album && !item.nsfw && !item.animated));
+  })
+  .catch(function (error) {
+    console.log(error);
+  })
   ;
+});
+
+app.post('/cart_update', function(req, res){
+  pusher.trigger('cart', 'update', req.body);
+  //console.log('entrou');
 });
 
 app.use('/node_modules', express.static(path.join(__dirname, 'node_modules')));

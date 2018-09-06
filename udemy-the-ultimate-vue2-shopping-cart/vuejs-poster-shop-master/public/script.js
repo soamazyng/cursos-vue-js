@@ -1,5 +1,11 @@
 var PRICE = 9.99;
 var LOAD_NUM = 10;
+
+var pusher = new Pusher('21bf40e6e0165ecb1cc2', {
+	cluster: 'ap1',
+	encrypted: true
+});
+
 new Vue({
 	el: '#app',
 	data: {
@@ -10,7 +16,8 @@ new Vue({
 		search: 'anime',
 		lastSearch: '',
 		loading : false,
-		price: PRICE
+		price: PRICE,
+		pusherUpdate: false
 	},
 	mounted:function(){
 		this.onSubmit();
@@ -20,13 +27,36 @@ new Vue({
 		watcher.enterViewport(function(){
 			vueInstance.appendItems();
 		});
+
+		var channel = pusher.subscribe('cart');
+		channel.bind('update', function(data){
+			vueInstance.pusherUpdate = true;
+			vueInstance.cart = data;
+			vue.total = 0;
+			for(var i = 0; i < vueInstance.cart.length; i++){
+				vueInstance.total += PRICE * vueInstance.cart[i].qty;
+			}
+		});
+
 	},
 	computed: {
 		noMoreItems: function(){
 			return this.items.length === this.results.length && this.results.length > 0;
 		}
 	},
-	methods:{
+	watch : {
+		cart : {
+			handler: function(val) {
+				if(!this.pusherUpdate){
+					this.$http.post('/cart_update', val);				
+				}else{
+					this.pusherUpdate = false;
+				}
+			},
+			deep: true
+		}
+	},
+	methods : {
 		appendItems : function(){
 			if(this.items.length < this.results.length){
 				var append = this.results.slice(this.items.length, this.items.length + LOAD_NUM);
@@ -47,7 +77,7 @@ new Vue({
 					this.appendItems();
 				});
 			}			
-		},
+		},		
 		addItem: function(index){
 			this.total += PRICE;
 			var item = this.items[index];
